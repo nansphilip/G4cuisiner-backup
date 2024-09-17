@@ -165,23 +165,23 @@ export const UpdateUserLastname = async ({ email, lastname }: {
  * @returns updated user data
  * @throws Error if unable to update email
  */
-export const UpdateUserEmail = async ({ email, newEmail }: {
-    email: string,
-    newEmail: string
-}): Promise<UserDatabase> => {
-    try {
-        const data = await Prisma.user.update({
-            where: { email },
-            data: { email: newEmail }
-        })
+// export const UpdateUserEmail = async ({ email, newEmail }: {
+//     email: string,
+//     newEmail: string
+// }): Promise<UserDatabase> => {
+//     try {
+//         const data = await Prisma.user.update({
+//             where: { email },
+//             data: { email: newEmail }
+//         })
 
-        // console.log("User update email", data)
+//         // console.log("User update email", data)
 
-        return data
-    } catch (error) {
-        throw new Error("Unable to update email -> " + (error as Error).message)
-    }
-}
+//         return data
+//     } catch (error) {
+//         throw new Error("Unable to update email -> " + (error as Error).message)
+//     }
+// }
 
 /**
  * Update user password

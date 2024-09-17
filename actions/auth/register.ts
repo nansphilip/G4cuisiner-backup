@@ -1,7 +1,7 @@
 "use server"
 
-import { GenerateVerifyToken } from "@utils/token"
-import { SendEmail } from "@utils/resend"
+// import { GenerateVerifyToken } from "@utils/token"
+// import { SendEmail } from "@utils/resend"
 import { CreateUser, SelectUser } from "@database/User"
 import { HashPassword } from "@utils/bcrypt"
 import { CreateSession } from "@cookies/Session"
@@ -59,11 +59,11 @@ export const Register = async (data: {
         // If the user already exists
         if (existingUser) {
             // Send email "Your account already exists
-            await SendEmail({
-                email: email,
-                subject: 'Your account already exists',
-                body: `<p>Please <a href={domain.com}/login>login</a> or <a href={domain.com}/reset>reset your password</a>.</p>`
-            })
+            // await SendEmail({
+            //     email: email,
+            //     subject: 'Your account already exists',
+            //     body: `<p>Please <a href={domain.com}/login>login</a> or <a href={domain.com}/reset>reset your password</a>.</p>`
+            // })
 
         } else {
             // Create the user
@@ -76,14 +76,14 @@ export const Register = async (data: {
 
 
             // Generate a verification token
-            const generatedToken = await GenerateVerifyToken(email, clientId)
+            // const generatedToken = await GenerateVerifyToken(email, clientId)
 
             // Send the verification email
-            await SendEmail({
-                email: email,
-                subject: 'Validate your email address',
-                body: `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>`
-            })
+            // await SendEmail({
+            //     email: email,
+            //     subject: 'Validate your email address',
+            //     body: `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>`
+            // })
 
             // Create session in database
             await CreateSessionDB({

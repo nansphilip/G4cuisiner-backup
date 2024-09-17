@@ -1,6 +1,6 @@
 import { GetSession } from "@cookies/Session"
 import ProfileClient from "@app/(core)/profile/client.profile"
-import ResendButtonClient from "@app/(core)/profile/client.resend"
+// import ResendButtonClient from "@app/(core)/profile/client.resend"
 import { CircleCheck, CircleAlert, KeyRound } from "lucide-react"
 import { SelectAllSessionDB } from "@database/Session"
 import { GetClient } from "@cookies/client"
@@ -61,7 +61,7 @@ export default async function ProfilePage() {
             </label>
         </ProfileClient>
 
-        <ProfileClient action="UpdateEmail" className="flex flex-col items-center justify-center gap-2 rounded-xl border p-4 shadow">
+        {/* <ProfileClient action="UpdateEmail" className="flex flex-col items-center justify-center gap-2 rounded-xl border p-4 shadow">
             <h2 className="text-2xl font-bold">Update email</h2>
             <p className="text-center text-xs text-gray-500">Link a new email to your account.</p>
             <div className="flex w-full flex-col items-center justify-center gap-2">
@@ -95,7 +95,7 @@ export default async function ProfilePage() {
                 New email
                 <input className="rounded border px-2 outline-none ring-teal-400 ring-offset-2 focus:ring-2" name="newEmail" type="email" required autoComplete="on" />
             </label>
-        </ProfileClient >
+        </ProfileClient > */}
 
         <ProfileClient action="UpdatePassword" className="flex flex-col items-center justify-center gap-2 rounded-xl border p-4 shadow">
             <h2 className="text-2xl font-bold">Change password</h2>

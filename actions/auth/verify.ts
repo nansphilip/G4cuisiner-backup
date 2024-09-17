@@ -3,8 +3,8 @@
 import { SelectUser, UpdateUserEmailVerified } from "@database/User"
 import { DeleteToken, SelectToken } from "@database/Token"
 import { GetSession, UpdateSession } from "@cookies/Session"
-import { GenerateVerifyToken } from "@utils/token"
-import { SendEmail } from "@utils/resend"
+// import { GenerateVerifyToken } from "@utils/token"
+// import { SendEmail } from "@utils/resend"
 import { z } from "zod"
 import { ZodTypes, ZodParse } from "@utils/zod"
 
@@ -37,14 +37,14 @@ export const Verify = async (data: {
         // If token has expired, send a new email token and return error
         if (!hasExpired) {
             // Generate a verification token
-            const generatedToken = await GenerateVerifyToken(existingToken?.email, clientId)
+            // const generatedToken = await GenerateVerifyToken(existingToken?.email, clientId)
 
             // Send the verification email
-            await SendEmail({
-                email: existingToken?.email,
-                subject: 'Validate your email address',
-                body: `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>`
-            })
+            // await SendEmail({
+            //     email: existingToken?.email,
+            //     subject: 'Validate your email address',
+            //     body: `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>`
+            // })
 
             return { error: "Token has expired." }
         }

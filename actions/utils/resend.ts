@@ -28,33 +28,33 @@ const emailSender = process.env.NODE_ENV !== 'production' ?
  * @returns the email id of the sent email
  * @throws an error if the email could not be sent
  */
-export async function SendEmail({ email, subject, body }: {
-    email: string,
-    subject: string,
-    body: string
-}) {
-    try {
-        // Replace all {domain.com} with the correct `domain.com` or `localhost:3000`
-        const replaceDomain = (mail: string): string => {
-            if (mail.includes("{domain.com}")) {
-                const newBody = mail.replace("{domain.com}", domain)
-                return replaceDomain(newBody)
-            }
-            return mail
-        }
+// export async function SendEmail({ email, subject, body }: {
+//     email: string,
+//     subject: string,
+//     body: string
+// }) {
+//     try {
+//         // Replace all {domain.com} with the correct `domain.com` or `localhost:3000`
+//         const replaceDomain = (mail: string): string => {
+//             if (mail.includes("{domain.com}")) {
+//                 const newBody = mail.replace("{domain.com}", domain)
+//                 return replaceDomain(newBody)
+//             }
+//             return mail
+//         }
 
-        const bodyEmail = replaceDomain(body)
+//         const bodyEmail = replaceDomain(body)
 
-        // Send the email
-        const { data } = await ResendAPI.emails.send({
-            from: emailSender,
-            to: email,
-            subject: subject,
-            html: bodyEmail
-        })
+//         // Send the email
+//         const { data } = await ResendAPI.emails.send({
+//             from: emailSender,
+//             to: email,
+//             subject: subject,
+//             html: bodyEmail
+//         })
 
-        return data
-    } catch (error) {
-        throw new Error("Unable to send email -> " + (error as ErrorResponse).message)
-    }
-}
+//         return data
+//     } catch (error) {
+//         throw new Error("Unable to send email -> " + (error as ErrorResponse).message)
+//     }
+// }

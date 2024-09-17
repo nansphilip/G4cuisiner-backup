@@ -1,6 +1,10 @@
 "use client"
 
-import { UpdateEmail, UpdateName, UpdatePassword } from "@auth/update"
+import {
+    // UpdateEmail,
+    UpdateName, 
+    UpdatePassword
+} from "@auth/update"
 import { DeleteAccount } from "@auth/delete"
 import { FormEvent, useContext, useState } from "react"
 import Loader from "@server/loader"
@@ -12,7 +16,7 @@ import PasswordInputClient from "@comps/client/client.password"
 import Button from "@comps/ui/button"
 
 export default function ProfileClient({ action, className, children }: {
-    action: "UpdateName" | "UpdateEmail" | "UpdatePassword" | "DeleteAccount",
+    action: "UpdateName" | "UpdatePassword" | "DeleteAccount", // | "UpdateEmail"
     className?: string,
     children: React.ReactNode
 }) {
@@ -32,7 +36,7 @@ export default function ProfileClient({ action, className, children }: {
 
     const ServerAction = {
         UpdateName,
-        UpdateEmail,
+        // UpdateEmail,
         UpdatePassword,
         DeleteAccount
     }[action]

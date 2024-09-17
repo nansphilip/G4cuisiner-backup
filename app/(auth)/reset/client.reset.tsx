@@ -103,6 +103,8 @@ export default function ResetClient({ className, children, session }: {
         }
     }
 
+    return <>Sorry, this feature is not available now.</>
+
     return <CsrfFormClient onSubmit={(e) => reset(e)} className={className}>
         {children}
         {token ?

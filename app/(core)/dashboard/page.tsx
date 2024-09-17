@@ -32,7 +32,7 @@ export default async function DashboardPage() {
                 <p className="text-xs">Email</p>
                 <span className="font-semibold">{session?.data.email}</span>
             </li>
-            <li className="flex flex-col gap-1">
+            {/* <li className="flex flex-col gap-1">
                 <p className="text-xs">Verified</p>
                 <div className={`flex items-center justify-start gap-1 font-semibold` + (session?.data.emailVerified ? ` text-green-500` : ` text-red-500`)}>
                     {session?.data.emailVerified ?
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
                         <><span>No</span><CircleAlert size={16} /></>
                     }
                 </div>
-            </li>
+            </li> */}
             <li>
                 <p className="text-xs">Session</p>
                 <ul className="flex flex-col gap-2">

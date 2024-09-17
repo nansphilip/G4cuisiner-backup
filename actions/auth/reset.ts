@@ -3,8 +3,8 @@
 import { DeleteAllCsrfTokens, DeleteToken, SelectAllTokens, SelectToken } from "@database/Token"
 import { SelectUser, UpdateUserPassword } from "@database/User"
 import { HashPassword } from "@utils/bcrypt"
-import { SendEmail } from "@utils/resend"
-import { GenerateVerifyToken } from "@utils/token"
+// import { SendEmail } from "@utils/resend"
+// import { GenerateVerifyToken } from "@utils/token"
 import { z } from "zod"
 import { ZodTypes, ZodParse } from "@utils/zod"
 import { DestroyCsrf, GetCsrf } from "@cookies/csrf"
@@ -48,14 +48,14 @@ export const ResetLink = async (data: {
         if (!existingUser) return { success: "If an account with this email exists, an email has been sent to reset your password." }
 
         // Generate a verification token
-        const generatedToken = await GenerateVerifyToken(existingUser.email, clientId)
+        // const generatedToken = await GenerateVerifyToken(existingUser.email, clientId)
 
         // Send the verification email
-        await SendEmail({
-            email: existingUser.email,
-            subject: 'Reset your password',
-            body: `<p>Please reset your password by clicking this link: <a href={domain.com}/reset?token=${generatedToken}>reset my password</a>.</p>`
-        })
+        // await SendEmail({
+        //     email: existingUser.email,
+        //     subject: 'Reset your password',
+        //     body: `<p>Please reset your password by clicking this link: <a href={domain.com}/reset?token=${generatedToken}>reset my password</a>.</p>`
+        // })
 
         // Delete CSRF token
         await DeleteToken({ id: existingCsrfToken.id })

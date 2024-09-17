@@ -3,8 +3,8 @@
 import { SelectUser, UpdateUserPassword, UpdateUserFirstname, UpdateUserLastname, UpdateUserNewEmail } from "@database/User"
 import { ComparePassword, HashPassword } from "@utils/bcrypt"
 import { GetSession, UpdateSession } from "@cookies/Session"
-import { GenerateVerifyToken } from "@utils/token"
-import { SendEmail } from "@utils/resend"
+// import { GenerateVerifyToken } from "@utils/token"
+// import { SendEmail } from "@utils/resend"
 import { z } from "zod"
 import { ZodTypes, ZodParse } from "@utils/zod"
 
@@ -65,66 +65,66 @@ export const UpdateName = async (data: {
  * @param data - Data to update the email
  * @returns Updated email
  */
-export const UpdateEmail = async (data: {
-    newEmail: string,
-    password: string,
-    clientId: string
-}) => {
-    try {
-        // Create a ZodTypes schema
-        const updateSchema = z.object({
-            newEmail: ZodTypes.email,
-            password: ZodTypes.password,
-            clientId: ZodTypes.token
-        })
+// export const UpdateEmail = async (data: {
+//     newEmail: string,
+//     password: string,
+//     clientId: string
+// }) => {
+//     try {
+//         // Create a ZodTypes schema
+//         const updateSchema = z.object({
+//             newEmail: ZodTypes.email,
+//             password: ZodTypes.password,
+//             clientId: ZodTypes.token
+//         })
 
-        // Destructure the credentials
-        const { newEmail, password, clientId } = await ZodParse({ zodSchema: updateSchema, dataToParse: data })
+//         // Destructure the credentials
+//         const { newEmail, password, clientId } = await ZodParse({ zodSchema: updateSchema, dataToParse: data })
 
-        // Get the session
-        const session = await GetSession()
-        if (!session) throw new Error("User not authenticated.")
+//         // Get the session
+//         const session = await GetSession()
+//         if (!session) throw new Error("User not authenticated.")
 
-        // Get the existing user
-        const existingUser = await SelectUser({ email: session.data.email })
-        if (!existingUser) throw new Error("User not found.")
+//         // Get the existing user
+//         const existingUser = await SelectUser({ email: session.data.email })
+//         if (!existingUser) throw new Error("User not found.")
 
-        // Check password
-        const passwordMatch = await ComparePassword({
-            password,
-            hashedPassword: existingUser.password
-        })
-        if (!passwordMatch) return { error: "Invalid password." }
+//         // Check password
+//         const passwordMatch = await ComparePassword({
+//             password,
+//             hashedPassword: existingUser.password
+//         })
+//         if (!passwordMatch) return { error: "Invalid password." }
 
-        // Update user new email
-        const updatedUser = await UpdateUserNewEmail({
-            id: existingUser.id,
-            email: session.data.email,
-            newEmail: newEmail
-        })
+//         // Update user new email
+//         const updatedUser = await UpdateUserNewEmail({
+//             id: existingUser.id,
+//             email: session.data.email,
+//             newEmail: newEmail
+//         })
 
-        // Update the session
-        await UpdateSession({
-            newEmail: updatedUser.newEmail
-        })
+//         // Update the session
+//         await UpdateSession({
+//             newEmail: updatedUser.newEmail
+//         })
 
-        // Generate a verification token
-        const generatedToken = await GenerateVerifyToken(newEmail, clientId)
+//         // Generate a verification token
+//         const generatedToken = await GenerateVerifyToken(newEmail, clientId)
 
-        // Send the verification email
-        await SendEmail({
-            email: newEmail,
-            subject: 'Validate your new email address',
-            body: `<p>Please confirm your new email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my new email</a>.</p>`
-        })
+//         // Send the verification email
+//         await SendEmail({
+//             email: newEmail,
+//             subject: 'Validate your new email address',
+//             body: `<p>Please confirm your new email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my new email</a>.</p>`
+//         })
 
-        // Return success message
-        return { success: "An email has been set, please confirm your new address." }
-    } catch (error) {
-        console.error("Update email error ->", (error as Error).message)
-        return { error: "An unexpected error occurred. Please try again later." }
-    }
-}
+//         // Return success message
+//         return { success: "An email has been set, please confirm your new address." }
+//     } catch (error) {
+//         console.error("Update email error ->", (error as Error).message)
+//         return { error: "An unexpected error occurred. Please try again later." }
+//     }
+// }
 
 /**
  * Updates the password of a user
@@ -183,37 +183,37 @@ export const UpdatePassword = async (data: {
  * @param clientId - Client ID
  * @returns Resended email
  */
-export const ResendEmail = async (
-    name: string,
-    clientId: string
-) => {
-    try {
-        // Get the session
-        const session = await GetSession()
-        if (!session) throw new Error("User not authenticated.")
+// export const ResendEmail = async (
+//     name: string,
+//     clientId: string
+// ) => {
+//     try {
+//         // Get the session
+//         const session = await GetSession()
+//         if (!session) throw new Error("User not authenticated.")
 
-        // Get the email
-        const email = name === "notVerifiedEmail" ?
-            session.data.email :
-            session.data.newEmail as string
+//         // Get the email
+//         const email = name === "notVerifiedEmail" ?
+//             session.data.email :
+//             session.data.newEmail as string
 
-        // Generate a verification token
-        const generatedToken = await GenerateVerifyToken(email, clientId)
+//         // Generate a verification token
+//         const generatedToken = await GenerateVerifyToken(email, clientId)
 
-        // Send the verification email
-        await SendEmail({
-            email: email,
-            subject: name === "notVerifiedEmail" ?
-                'Validate your email address' :
-                'Validate your new email address',
-            body: name === "notVerifiedEmail" ?
-                `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>` :
-                `<p>Please confirm your new email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my new email</a>.</p>`
-        })
+//         // Send the verification email
+//         await SendEmail({
+//             email: email,
+//             subject: name === "notVerifiedEmail" ?
+//                 'Validate your email address' :
+//                 'Validate your new email address',
+//             body: name === "notVerifiedEmail" ?
+//                 `<p>Please confirm your email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my email</a>.</p>` :
+//                 `<p>Please confirm your new email by clicking this link: <a href={domain.com}/verify?token=${generatedToken}>confirm my new email</a>.</p>`
+//         })
 
-        return { success: "Sent!" }
-    } catch (error) {
-        console.error("Resend email error ->", (error as Error).message)
-        return { error: "Retry later..." }
-    }
-}
+//         return { success: "Sent!" }
+//     } catch (error) {
+//         console.error("Resend email error ->", (error as Error).message)
+//         return { error: "Retry later..." }
+//     }
+// }
