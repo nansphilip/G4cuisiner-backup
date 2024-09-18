@@ -60,7 +60,7 @@ G4cuisiner is G4 School student project.
   SESSION_SECRET = "your-session-secret-generated-with-openssl";
   ```
 
-  - Resend API config ([Resend Docs](https://resend.com/docs/dashboard/api-keys/introduction))
+  <!-- - Resend API config ([Resend Docs](https://resend.com/docs/dashboard/api-keys/introduction))
 
   ```js
   RESEND_API_KEY = "your-resend-api-key-generated-with-resend-dashboard";
@@ -72,7 +72,7 @@ G4cuisiner is G4 School student project.
   ```js
   RESEND_DOMAIN = "https://domain.com";
   RESEND_EMAIL = "hello@domain.com";
-  ```
+  ``` -->
 
 - Generate the Prisma client
 
