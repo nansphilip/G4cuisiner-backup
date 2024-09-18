@@ -42,8 +42,7 @@ G4cuisiner is G4 School student project.
     > I use MySQL Prisma adapter, but you can use any other database supported by Prisma. Follow the [Prisma database drivers](https://www.prisma.io/docs/orm/overview/databases/database-drivers) to setup your database.
 
   ```js
-  DATABASE_URL =
-    "mysql://g4cuisiner-user:g4cuisiner-password@localhost:3306/g4cuisiner-db";
+  DATABASE_URL = "mysql://g4cuisiner-user:g4cuisiner-password@localhost:3306/g4cuisiner-db";
   ```
 
   - Session secret ([Jose Docs](https://github.com/panva/jose))
