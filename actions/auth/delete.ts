@@ -1,6 +1,6 @@
 "use server"
 
-import { GetSession } from "@cookies/Session"
+import { GetSession } from "@cookies/session"
 import { DeleteUser, SelectUser } from "@database/User"
 import { ComparePassword } from "@utils/bcrypt"
 import { z } from "zod"

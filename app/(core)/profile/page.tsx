@@ -1,4 +1,4 @@
-import { GetSession } from "@cookies/Session"
+import { GetSession } from "@cookies/session"
 import ProfileClient from "@app/(core)/profile/client.profile"
 // import ResendButtonClient from "@app/(core)/profile/client.resend"
 import { CircleCheck, CircleAlert, KeyRound } from "lucide-react"

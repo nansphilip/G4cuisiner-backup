@@ -1,6 +1,6 @@
 "use client"
 
-import { DestroySession, GetSession } from "@cookies/Session"
+import { DestroySession, GetSession } from "@cookies/session"
 import { DeleteSessionDB, SelectSessionDB } from "@database/Session"
 import { SessionCookies, SessionDatabase } from "@lib/types"
 import { useRouter } from "next/navigation"

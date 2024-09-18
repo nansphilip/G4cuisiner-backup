@@ -15,25 +15,25 @@ G4cuisiner is G4 School student project.
   - Creates a database
 
   ```sql
-  CREATE DATABASE `g4cuisiner-db`;
+  CREATE DATABASE `gcuisiner-db`;
   ```
 
   - Selects the new database
 
   ```sql
-  USE `g4cuisiner-db`;
+  USE `gcuisiner-db`;
   ```
 
   - Creates an user and a password
 
   ```sql
-  CREATE USER 'g4cuisiner-user'@'localhost' IDENTIFIED BY 'g4cuisiner-password';
+  CREATE USER 'gcuisiner-user'@'localhost' IDENTIFIED BY 'gcuisiner-password';
   ```
 
   - Allows user to connect to database
 
   ```sql
-  GRANT ALL PRIVILEGES ON *.* TO 'g4cuisiner-user'@'localhost';
+  GRANT ALL PRIVILEGES ON *.* TO 'gcuisiner-user'@'localhost';
   ```
 
 - Add an `.env` file at the root of the project, with the following variables
@@ -42,7 +42,7 @@ G4cuisiner is G4 School student project.
     > I use MySQL Prisma adapter, but you can use any other database supported by Prisma. Follow the [Prisma database drivers](https://www.prisma.io/docs/orm/overview/databases/database-drivers) to setup your database.
 
   ```js
-  DATABASE_URL = "mysql://g4cuisiner-user:g4cuisiner-password@localhost:3306/g4cuisiner-db";
+  DATABASE_URL = "mysql://gcuisiner-user:gcuisiner-password@localhost:3306/gcuisiner-db";
   ```
 
   - Session secret ([Jose Docs](https://github.com/panva/jose))

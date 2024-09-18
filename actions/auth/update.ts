@@ -2,7 +2,7 @@
 
 import { SelectUser, UpdateUserPassword, UpdateUserFirstname, UpdateUserLastname, UpdateUserNewEmail } from "@database/User"
 import { ComparePassword, HashPassword } from "@utils/bcrypt"
-import { GetSession, UpdateSession } from "@cookies/Session"
+import { GetSession, UpdateSession } from "@cookies/session"
 // import { GenerateVerifyToken } from "@utils/token"
 // import { SendEmail } from "@utils/resend"
 import { z } from "zod"

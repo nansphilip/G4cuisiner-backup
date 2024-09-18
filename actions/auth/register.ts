@@ -4,7 +4,7 @@
 // import { SendEmail } from "@utils/resend"
 import { CreateUser, SelectUser } from "@database/User"
 import { HashPassword } from "@utils/bcrypt"
-import { CreateSession } from "@cookies/Session"
+import { CreateSession } from "@cookies/session"
 import { z } from "zod"
 import { ZodTypes, ZodParse } from "@utils/zod"
 import { DeleteAllCsrfTokens, DeleteToken, SelectAllTokens, SelectToken } from "@database/Token"

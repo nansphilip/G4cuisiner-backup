@@ -2,7 +2,7 @@
 
 import { SelectUser, UpdateUserEmailVerified } from "@database/User"
 import { DeleteToken, SelectToken } from "@database/Token"
-import { GetSession, UpdateSession } from "@cookies/Session"
+import { GetSession, UpdateSession } from "@cookies/session"
 // import { GenerateVerifyToken } from "@utils/token"
 // import { SendEmail } from "@utils/resend"
 import { z } from "zod"

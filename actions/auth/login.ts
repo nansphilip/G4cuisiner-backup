@@ -1,6 +1,6 @@
 "use server"
 
-import { CreateSession } from "@cookies/Session"
+import { CreateSession } from "@cookies/session"
 import { DeleteAllCsrfTokens, DeleteToken, SelectAllTokens, SelectToken } from "@database/Token"
 import { SelectUser } from "@database/User"
 import { ComparePassword } from "@utils/bcrypt"
