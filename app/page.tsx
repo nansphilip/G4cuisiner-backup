@@ -1,5 +1,13 @@
 import { GetSession } from "@cookies/session";
 import Button from "@comps/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@ui/card";
 
 export default async function Home() {
   const session = await GetSession();
@@ -25,6 +33,21 @@ export default async function Home() {
           </>
         )}
       </div>
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Create project</CardTitle>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>This is the content</CardContent>
+        <CardFooter className="flex justify-between">
+          <Button type="button" variant="outline">
+            Cancel
+          </Button>
+          <Button type="button">Deploy</Button>
+        </CardFooter>
+      </Card>
       {/* <Button type="button" variant="default" animation={true} ring="none" className="h-12 w-24 text-xl">Wave</Button> */}
     </main>
   );

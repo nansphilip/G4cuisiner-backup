@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      // "@/*": ["./*"],
+      "@/*": ["./*"],
       "@app/*": ["./app/*"],
       "@public/*": ["./public/*"],
       "@prisma/*": ["./prisma/*"],
@@ -32,6 +32,7 @@
       "@utils/*": ["./actions/utils/*"],
       
       "@comps/*": ["./components/*"],
+      "@ui/*": ["./components/ui/*"],
       "@client/*": ["./components/client/*"],
       "@server/*": ["./components/server/*"],
       "@style/*": ["./components/style/*"],
