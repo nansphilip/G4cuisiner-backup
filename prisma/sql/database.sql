@@ -1,11 +1,11 @@
 -- Creates a database
-CREATE DATABASE `gcuisiner-db`;
+CREATE DATABASE `g4cuisiner-db`;
 
 -- Selects the new database
-USE `gcuisiner-db`;
+USE `g4cuisiner-db`;
 
 -- Creates an user and a password
-CREATE USER 'gcuisiner-user'@'localhost' IDENTIFIED BY 'gcuisiner-password';
+CREATE USER 'g4cuisiner-user'@'localhost' IDENTIFIED BY 'g4cuisiner-password';
 
 -- Allows user to connect to database
-GRANT ALL PRIVILEGES ON *.* TO 'gcuisiner-user'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'g4cuisiner-user'@'localhost';
