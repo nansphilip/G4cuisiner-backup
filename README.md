@@ -17,7 +17,7 @@ G4cuisiner is G4 School student project.
   pnpm install
   ```
 
-- Initialize the database
+<!-- - Initialize the database
 
   - Creates a database
 
@@ -29,9 +29,9 @@ G4cuisiner is G4 School student project.
 
   ```sql
   USE `g4cuisiner-db`;
-  ```
+  ``` -->
 
-  - Creates an user and a password
+- Creates a database user and a password
 
   ```sql
   CREATE USER 'g4cuisiner-user'@'localhost' IDENTIFIED BY 'g4cuisiner-password';
@@ -69,15 +69,15 @@ G4cuisiner is G4 School student project.
   <!-- - Resend API config ([Resend Docs](https://resend.com/docs/dashboard/api-keys/introduction))
 
   ```js
-  RESEND_API_KEY = "your-resend-api-key-generated-with-resend-dashboard";
+  RESEND_API_KEY=your-resend-api-key-generated-with-resend-dashboard
   ```
 
   - Other necessary variables
     `Copy/paste` theses parameters into your `.env` file
 
   ```js
-  RESEND_DOMAIN = "https://domain.com";
-  RESEND_EMAIL = "hello@domain.com";
+  RESEND_DOMAIN=https://domain.com
+  RESEND_EMAIL=hello@domain.com
   ``` -->
 
 - Generate the Prisma client

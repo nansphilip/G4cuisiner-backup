@@ -4,7 +4,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    // "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -21,7 +20,6 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
-      "@public/*": ["./public/*"],
       "@prisma/*": ["./prisma/*"],
       
       "@cookies/*": ["./actions/cookies/*"],
@@ -36,6 +34,9 @@
       "@client/*": ["./components/client/*"],
       "@server/*": ["./components/server/*"],
       "@style/*": ["./components/style/*"],
+      
+      "@public/*": ["./public/*"],
+      "@images/*": ["./public/images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
