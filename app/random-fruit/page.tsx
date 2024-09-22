@@ -1,32 +1,34 @@
 // Composant client
-"use client"
+"use client";
 
 // Imports des composants nécessaires
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "@ui/card";
+import { Card, CardDescription, CardHeader, CardImage, CardTitle } from "@ui/card";
 import Button from "@comps/ui/button";
 import { RandomFruit, RandomFruits } from "@/actions/fruits";
 import { useState } from "react";
 
 // Composant Page Fruits
 export default function FruitsPage() {
-
-    const [fruitList, setFruitList] = useState<RandomFruit[]>([])
+    const [fruitList, setFruitList] = useState<RandomFruit[]>([]);
 
     const GetFruit = async () => {
-        const newFruit = await RandomFruits()
+        const newFruit = await RandomFruits();
 
         if (newFruit) {
-            const newFruitList = [...fruitList, newFruit]
-            setFruitList(newFruitList)
+            const newFruitList = [...fruitList, newFruit];
+            setFruitList(newFruitList);
         }
-    }
+    };
 
     // Afficher le contenu de la page
     return (
-        <main className="overflow-y-auto flex flex-1 flex-col items-center justify-center gap-2 px-6 pb-6">
-            <div className="flex gap-4 flex-wrap items-center justify-center">
-                {fruitList.map((fruit) => (
-                    <Card className="w-[300px] overflow-hidden transition-all duration-200 hover:scale-105 hover:shadow-md hover:shadow-gray-300">
+        <main className="flex flex-1 flex-col items-center justify-center gap-2 overflow-y-auto px-6 pb-6">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+                {fruitList.map((fruit, index) => (
+                    <Card
+                        key={index}
+                        className="w-[300px] overflow-hidden transition-all duration-200 hover:scale-105 hover:shadow-md hover:shadow-gray-300"
+                    >
                         <CardImage src={fruit.image} width={400} height={500} alt={fruit.nom} />
                         <CardHeader>
                             <CardTitle>{fruit.nom}</CardTitle>
@@ -35,7 +37,9 @@ export default function FruitsPage() {
                     </Card>
                 ))}
             </div>
-            <Button type="button" className="py-2 px-4" onClick={GetFruit}>{fruitList ? "Obtenir un fruit" : "Encore un fuit ?"}</Button>
+            <Button type="button" className="px-4 py-2" onClick={GetFruit}>
+                {fruitList ? "Obtenir un fruit" : "Encore un fuit ?"}
+            </Button>
         </main>
     );
 }
