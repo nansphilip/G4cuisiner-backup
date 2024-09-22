@@ -4,12 +4,12 @@
 // Imports des composants nécessaires
 import { Card, CardDescription, CardHeader, CardImage, CardTitle } from "@ui/card";
 import Button from "@comps/ui/button";
-import { RandomFruit, RandomFruits } from "@/actions/fruits";
+import { RandomFruitType, RandomFruits } from "@/actions/fruits";
 import { useState } from "react";
 
 // Composant Page Fruits
 export default function FruitsPage() {
-    const [fruitList, setFruitList] = useState<RandomFruit[]>([]);
+    const [fruitList, setFruitList] = useState<RandomFruitType[]>([]);
 
     const GetFruit = async () => {
         const newFruit = await RandomFruits();

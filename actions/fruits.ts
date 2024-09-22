@@ -1,11 +1,11 @@
 "use server"
 
-export type RandomFruit = {
+export type RandomFruitType = {
     nom: string,
     image: string
 }
 
-export const RandomFruits = async (): Promise<RandomFruit> => {
+export const RandomFruits = async (): Promise<RandomFruitType> => {
 
     const fruitList = [
         { nom: "Kiwi", image: "/images/kiwi.webp" },
