@@ -58,7 +58,7 @@ export default function TimerClient({ session, className, sessionData, text }: {
             const intervalId = setInterval(refreshTimer, 1000);
             return () => clearInterval(intervalId);
         }
-    })
+    },[])
 
     return <span className={className}>
         {time} {text}

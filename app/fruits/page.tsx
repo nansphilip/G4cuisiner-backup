@@ -20,7 +20,7 @@ export default function FruitsPage() {
     return (
 
         <main className="flex flex-1 flex-col items-center justify-center gap-2">
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
 
                 {/* Rend le composant carte fruit pour chaque fruit dans la liste */}
                 {fruitsList.map((fruit, index) => (

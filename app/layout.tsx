@@ -27,9 +27,9 @@ export default async function RootLayout({
     // Get the session
     const session = await GetSession()
 
-    return <html lang="en" className="h-full">
+    return <html lang="fr" className="h-full">
         <ClientCookie client={client} />
-        <body className={`flex h-full flex-col overflow-hidden ${inter.className}`}>
+        <body className={`flex h-full flex-col ${inter.className}`}>
             <HeaderClient session={session} />
             <ClientContext client={client}>
                 {children}

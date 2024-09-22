@@ -25,7 +25,6 @@ export default async function Home() {
                     </>
                 )}
             </div>
-            <h2 className="text-4xl font-bold">Shift + Alt + Arrow = OMG</h2>
             {/* <Button type="button" variant="default" animation={true} ring="none" className="h-12 w-24 text-xl">Wave</Button> */}
         </main>
     );
