@@ -6,18 +6,22 @@ import { Card, CardDescription, CardHeader, CardImage, CardTitle } from "@ui/car
 import Button from "@comps/ui/button";
 import { RandomFruitType, RandomFruits } from "@/actions/fruits";
 import { useState } from "react";
+import Loader from "@server/loader";
 
 // Composant Page Fruits
 export default function FruitsPage() {
     const [fruitList, setFruitList] = useState<RandomFruitType[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const GetFruit = async () => {
+        setIsLoading(true);
         const newFruit = await RandomFruits();
 
         if (newFruit) {
             const newFruitList = [...fruitList, newFruit];
             setFruitList(newFruitList);
         }
+        setIsLoading(false);
     };
 
     // Afficher le contenu de la page
@@ -37,8 +41,15 @@ export default function FruitsPage() {
                     </Card>
                 ))}
             </div>
-            <Button type="button" className="px-4 py-2" onClick={GetFruit}>
-                {fruitList ? "Obtenir un fruit" : "Encore un fuit ?"}
+            <Button
+                type="button"
+                disabled={isLoading}
+                className="flex h-10 w-40 items-center justify-center p-6"
+                onClick={GetFruit}
+                animation={true}
+                ring="none"
+            >
+                {isLoading ? <Loader active={isLoading} /> : fruitList ? "Obtenir un fruit" : "Encore un fuit ?"}
             </Button>
         </main>
     );
