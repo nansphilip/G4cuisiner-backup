@@ -68,7 +68,7 @@ const Shortcut = ({ shortcut, action }: { shortcut: string[]; action: string }) 
                 {shortcut.map((key, index) => (
                     <div key={index} className="flex gap-2 font-mono">
                         <span
-                            className="rounded-md border px-2 py-1 shadow transition-all duration-200 hover:scale-105 hover:shadow-md hover:shadow-gray-300"
+                            className="rounded-md border border-gray-500 bg-gray-100 px-2 py-1 shadow transition-all duration-200 hover:scale-105 hover:shadow-md hover:shadow-gray-300"
                             key={index}
                         >
                             {key}

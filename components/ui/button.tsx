@@ -4,28 +4,7 @@ import Link from "next/link"
 
 export type variantType = "default" | "outline" | "ghost" | "danger" | "link" | "transparent"
 
-export default function Button({
-    type,href,
-
-    variant = "default",
-    buttonSize = "md",
-    fontSize = "md",
-    ring = "default",
-    className = "",
-
-    animation = false,
-    bgColor = "#000000",
-    hovColor = "#374151",
-    accentuate = true,
-    expandDuration = 500,
-    collapseDuration = 500,
-    frequency = 5,
-
-    children,
-    disabled,
-    onClick,
-    ...props
-}: {
+type ButtonProps = {
     type: "button" | "submit" | "link",
     href?: string | never,
 
@@ -57,7 +36,30 @@ export default function Button({
     type: "button" | "submit",
     href?: never,
     props?: React.ButtonHTMLAttributes<HTMLButtonElement>
-})) {
+})
+
+export default function Button({
+    type,href,
+
+    variant = "default",
+    buttonSize = "md",
+    fontSize = "md",
+    ring = "default",
+    className = "",
+
+    animation = false,
+    bgColor = "#000000",
+    hovColor = "#374151",
+    accentuate = true,
+    expandDuration = 500,
+    collapseDuration = 500,
+    frequency = 5,
+
+    children,
+    disabled,
+    onClick,
+    ...props
+}: ButtonProps) {
 
     const commonClass = "rounded"
 
