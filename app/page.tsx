@@ -25,7 +25,7 @@ export default async function Home() {
                     </>
                 )}
             </div>
-            <Button type="button" variant="default" animation={true} ring="none" className="h-12 w-24 text-xl">Wave</Button>
+            <Button type="button" variant="default" animation={true} ring="none" className="h-20 w-36 text-xl">Wave</Button>
         </main>
     );
 }
