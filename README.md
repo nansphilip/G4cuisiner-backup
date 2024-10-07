@@ -17,20 +17,6 @@ G4cuisiner is G4 School student project.
   pnpm install
   ```
 
-<!-- - Initialize the database
-
-  - Creates a database
-
-  ```sql
-  CREATE DATABASE `g4cuisiner-db`;
-  ```
-
-  - Selects the new database
-
-  ```sql
-  USE `g4cuisiner-db`;
-  ``` -->
-
 - Creates a database user and a password
 
   ```sql

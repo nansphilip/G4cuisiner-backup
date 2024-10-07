@@ -37,7 +37,7 @@ export default function SlidingHoverClient({ color, rounded, duration, className
             const hoveredEl = document.elementFromPoint(e.clientX, e.clientY)
 
             // If hovered element is a link <a href="">
-            if (hoveredEl?.nodeName === "A") {
+            if (hoveredEl?.nodeName === "A" || hoveredEl?.nodeName === "BUTTON" || hoveredEl?.nodeName === "DIV") {
                 slidingEl.style.opacity = "1"
 
                 // Get hovered element properties

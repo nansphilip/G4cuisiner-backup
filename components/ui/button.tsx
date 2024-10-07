@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { cn } from "../lib/utils"
 
 export type variantType = "default" | "outline" | "ghost" | "danger" | "link" | "transparent"
 
@@ -11,6 +12,7 @@ type ButtonProps = {
     variant?: variantType,
     buttonSize?: "none" | "sm" | "md" | "lg",
     fontSize?: "none" | "xs" | "sm" | "md" | "lg" | "xl",
+    roundedSize?: "none" | "default" | "md" | "lg",
     ring?: "default" | "none",
     className?: string,
 
@@ -25,6 +27,9 @@ type ButtonProps = {
     children?: React.ReactNode,
     disabled?: boolean,
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
+    onBlur?: React.FocusEventHandler<HTMLButtonElement>,
+    onMouseEnter?: React.MouseEventHandler<HTMLButtonElement>,
+    onMouseLeave?: React.MouseEventHandler<HTMLButtonElement>,
     props?: React.LinkHTMLAttributes<HTMLLinkElement> | React.ButtonHTMLAttributes<HTMLButtonElement>
 } & ({
     // If  type "link"
@@ -44,6 +49,7 @@ export default function Button({
     variant = "default",
     buttonSize = "md",
     fontSize = "md",
+    roundedSize = "default",
     ring = "default",
     className = "",
 
@@ -60,8 +66,6 @@ export default function Button({
     onClick,
     ...props
 }: ButtonProps) {
-
-    const commonClass = "rounded"
 
     const ringClass = {
         default: "ring-teal-400 ring-offset-2 active:ring-2 disabled:ring-0",
@@ -93,15 +97,27 @@ export default function Button({
         xl: "text-xl",
     }
 
-    // If element is not empty, join it with a space
-    const classList = [commonClass, ringClass[ring], variantClass[variant], buttonSizeClass[buttonSize], fontSizeClass[fontSize], className]
-        .filter(element => element).join(" ")
+    const roundedClass = {
+        none: "",
+        default: "rounded",
+        md: "rounded-md",
+        lg: "rounded-lg",
+    }
 
+    const classList = cn(
+        "text-center",
+        ringClass[ring],
+        variantClass[variant],
+        buttonSizeClass[buttonSize],
+        fontSizeClass[fontSize],
+        roundedClass[roundedSize],
+        className
+    )
 
     if (type === "link") return <Link
         href={href}
         className={classList}
-        {...props}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)} // Todo : why ?
     >
         {children}
     </Link>
