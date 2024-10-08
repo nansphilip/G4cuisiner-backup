@@ -6,6 +6,7 @@ import Button from "@comps/ui/button";
 import { cn } from "@comps/lib/utils";
 import { useState } from "react";
 import SlidingHoverClient from "@client/client.sliding-motion";
+import { ChevronDown } from "lucide-react";
 
 type LinkProps = {
     label: string;
@@ -58,17 +59,17 @@ export default function HeaderClient(props: HeaderProps) {
     ];
 
     return (
-        <header className="mt-2 h-12">
-            <nav className="flex justify-center gap-1">
+        <header className="mt-2">
+            <nav className="flex justify-center">
                 <SlidingHoverClient
-                    className="flex justify-center gap-1"
-                    color="bg-gray-100"
+                    className="flex items-start justify-center gap-1"
+                    color="bg-gray-200"
                     rounded="rounded-md"
-                    duration="duration-300"
+                    duration="duration-200"
                 >
-                {linkList.map((linkOrGroup, index) => (
-                    <HeaderDisplay key={index} linkOrGroup={linkOrGroup} session={session} />
-                ))}
+                    {linkList.map((linkOrGroup, index) => (
+                        <HeaderDisplay key={index} linkOrGroup={linkOrGroup} session={session} />
+                    ))}
                 </SlidingHoverClient>
             </nav>
         </header>
@@ -94,36 +95,36 @@ const HeaderDisplay = (props: HeaderDisplayProps) => {
         if (!displayButton) return <></>;
 
         return (
-            <div>
+            <div className="flex flex-col gap-2" onMouseLeave={() => setIsOpen(false)}>
                 <Button
                     type="button"
-                    variant="ghost"
+                    variant="transparent"
                     buttonSize="lg"
                     fontSize="md"
                     roundedSize="md"
                     ring="none"
                     key={key}
-                    className={cn("text-nowrap py-1")}
+                    className={cn("text-nowrap flex gap-1 py-1")}
                     onMouseEnter={() => setIsOpen(true)}
-                    onMouseLeave={() => setIsOpen(false)}
                 >
-                    {label}
+                    <span>{label}</span>
+                    <ChevronDown className={cn("transition-transform duration-300",
+                        isOpen && "-rotate-180"
+                    )} />
                 </Button>
                 <div
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
-                className={cn("relative flex flex-col gap-1 rounded-md",
-                    !isOpen && "hidden pointer-events-none"
-                )}>
+                    className={cn(
+                        "p-2 border relative opacity-100 transition-opacity duration-200 flex flex-col gap-1 rounded-md",
+                        !isOpen && "opacity-0 pointer-events-none"
+                    )}
+                >
                     {group.map((groupLink, index) => (
                         <HeaderLink key={index} link={groupLink} session={session} />
                     ))}
                 </div>
             </div>
         );
-    }
-
-    if ("label" in linkOrGroup) {
+    } else if ("label" in linkOrGroup) {
         const link: LinkProps = linkOrGroup;
         return <HeaderLink key={key} link={link} session={session} />;
     }
