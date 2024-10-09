@@ -74,7 +74,7 @@ export default function SlidingHoverClient({ color, rounded, duration, className
         {children}
         <div
             id="sliding-element"
-            className={`absolute -z-10 transition-all ${color} ${rounded} ${duration}`}
+            className={`absolute z-20 transition-all ${color} ${rounded} ${duration}`}
         ></div>
     </div>
 }

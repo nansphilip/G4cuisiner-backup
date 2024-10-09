@@ -26,7 +26,7 @@ export default function FruitsPage() {
 
     // Afficher le contenu de la page
     return (
-        <main className="flex flex-1 flex-col items-center justify-center gap-4 overflow-y-auto px-6 pb-6">
+        <>
             <p>Click button to dynamically fetch fruits from server.</p>
             <div className="flex flex-wrap items-center justify-center gap-4">
                 {fruitList.map((fruit, index) => (
@@ -52,6 +52,6 @@ export default function FruitsPage() {
             >
                 {isLoading ? <Loader active={isLoading} /> : fruitList ? "Obtenir un fruit" : "Encore un fuit ?"}
             </Button>
-        </main>
+        </>
     );
 }
