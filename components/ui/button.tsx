@@ -6,6 +6,7 @@ import { cn } from "../lib/utils"
 export type variantType = "default" | "outline" | "ghost" | "danger" | "link" | "transparent"
 
 type ButtonProps = {
+    id?: string,
     type: "button" | "submit" | "link",
     href?: string | never,
 
@@ -44,7 +45,9 @@ type ButtonProps = {
 })
 
 export default function Button({
-    type,href,
+    id,
+    type,
+    href,
 
     variant = "default",
     buttonSize = "md",
@@ -115,6 +118,7 @@ export default function Button({
     )
 
     if (type === "link") return <Link
+        id={id}
         href={href}
         className={classList}
         {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)} // Todo : why ?
@@ -123,6 +127,7 @@ export default function Button({
     </Link>
 
     else return <button
+        id={id}
         type={type}
         className={classList}
         disabled={disabled}

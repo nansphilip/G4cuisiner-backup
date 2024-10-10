@@ -74,7 +74,7 @@ export default function HeaderClient(props: HeaderProps) {
                     duration="duration-200"
                 >
                     {linkList.map((linkOrGroup, index) => (
-                        <HeaderDisplay key={index} linkOrGroup={linkOrGroup} session={session} />
+                        <HeaderDisplay key={index} index={index} linkOrGroup={linkOrGroup} session={session} />
                     ))}
                 </SlidingHoverClient>
             </nav>
@@ -84,6 +84,7 @@ export default function HeaderClient(props: HeaderProps) {
 }
 
 type HeaderDisplayProps = {
+    index: number;
     linkOrGroup: LinkProps | LinkGroup;
     session: SessionCookies | null;
 };
@@ -92,38 +93,53 @@ const HeaderDisplay = (props: HeaderDisplayProps) => {
     // Get the current pathname
     const pathname = usePathname();
 
+    // Toggle popup display
     const [isOpen, setIsOpen] = useState(false);
-    const [event, setEvent] = useState<React.MouseEvent<HTMLButtonElement> | null>(null);
 
-    const { linkOrGroup, session } = props;
+    // Destructure props
+    const { index, linkOrGroup, session } = props;
 
     useEffect(() => {
-        if ("group" in linkOrGroup && event && isOpen) {
-            // Get hovered element
-            const buttonNavEl = event.target as HTMLElement;
-            const parentNavEl = buttonNavEl.parentElement as HTMLElement;
-            const popupNavEl = parentNavEl.querySelector("div") as HTMLElement;
-            const popupNavBgEl = parentNavEl.querySelector("div:nth-child(3)") as HTMLElement;
+        if ("group" in linkOrGroup && isOpen) {
+            // Set offset
+            const offset = 8;
 
-            // Get button dimensions
-            const buttonHeight = buttonNavEl.offsetHeight;
-            const buttonWidth = buttonNavEl.offsetWidth;
+            // Get popup elements
+            const buttonEl = document.querySelector(`#popup-btn-${index}`) as HTMLElement;
+            const navigationEl = document.querySelector(`#popup-nav-${index}`) as HTMLElement;
+            const backgroundEl = document.querySelector(`#popup-bg-${index}`) as HTMLElement;
+            const hoverZoneEl = document.querySelector(`#popup-hov-${index}`) as HTMLElement;
 
-            // Set popup dimensions
-            popupNavEl.style.top = `${buttonNavEl.offsetTop + buttonHeight}px`;
-            popupNavEl.style.width = `${buttonWidth}px`;
+            // Get button dimensions and position
+            const buttonRect = buttonEl.getBoundingClientRect();
+            const buttonHeight = buttonRect.height;
+            const buttonWidth = buttonRect.width;
+            const buttonTop = buttonRect.top;
 
-            // Get popup dimensions
-            const popupHeight = popupNavEl.offsetHeight;
-            const popupWidth = popupNavEl.offsetWidth;
+            // Set navigation dimensions and position
+            navigationEl.style.top = `${buttonTop + buttonHeight + offset}px`;
+            navigationEl.style.width = `${buttonWidth}px`;
 
-            // Set popup background dimensions and position
-            popupNavBgEl.style.height = `${popupHeight}px`;
-            popupNavBgEl.style.width = `${popupWidth}px`;
-            popupNavBgEl.style.top = `${popupNavEl.offsetTop}px`;
-            popupNavBgEl.style.left = `${popupNavEl.offsetLeft}px`;
+            // Get naviation dimensions
+            const navigationRect = navigationEl.getBoundingClientRect();
+            const navigationHeight = navigationRect.height;
+            const navigationWidth = navigationRect.width;
+            const navigationTop = navigationRect.top;
+            const navigationLeft = navigationRect.left;
+
+            // Set background dimensions and position
+            backgroundEl.style.height = `${navigationHeight}px`;
+            backgroundEl.style.width = `${navigationWidth}px`;
+            backgroundEl.style.top = `${navigationTop}px`;
+            backgroundEl.style.left = `${navigationLeft}px`;
+
+            // Set hover zone dimensions and position
+            hoverZoneEl.style.height = `${offset}px`;
+            hoverZoneEl.style.width = `${buttonWidth}px`;
+            hoverZoneEl.style.top = `${buttonTop + buttonHeight}px`;
+            hoverZoneEl.style.left = `${navigationLeft}px`;
         }
-    }, [isOpen, event, linkOrGroup]);
+    }, [linkOrGroup, isOpen, index]);
 
     if ("group" in linkOrGroup) {
         const { label, href, group } = linkOrGroup;
@@ -134,8 +150,9 @@ const HeaderDisplay = (props: HeaderDisplayProps) => {
         if (!displayButton) return <></>;
 
         return (
-            <div className="flex flex-col gap-2" onMouseLeave={() => setIsOpen(false)}>
+            <div className="flex flex-col gap-2">
                 <Button
+                    id={`popup-btn-${index}`}
                     {...(href ? { type: "link", href } : { type: "button" })}
                     variant="transparent"
                     buttonSize="lg"
@@ -146,16 +163,17 @@ const HeaderDisplay = (props: HeaderDisplayProps) => {
                         "relative z-30 flex gap-1 text-nowrap py-1",
                         group.filter((link) => pathname === link.href).length > 0 && "font-bold"
                     )}
-                    onMouseEnter={(e) => {
-                        setIsOpen(true);
-                        setEvent(e);
-                    }}
+                    onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
                 >
                     <span>{label}</span>
                     <ChevronDown className={cn("transition-transform duration-300", isOpen && "-rotate-180")} />
                 </Button>
                 {/* Navigation popup */}
                 <div
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                    id={`popup-nav-${index}`}
                     className={cn(
                         "z-30 p-2 border absolute opacity-100 transition-opacity duration-200 flex flex-col gap-1 rounded-lg",
                         !isOpen && "opacity-0 pointer-events-none"
@@ -167,14 +185,20 @@ const HeaderDisplay = (props: HeaderDisplayProps) => {
                 </div>
                 {/* Backgroud popup */}
                 <div
+                    id={`popup-bg-${index}`}
                     className={cn(
                         "bg-white opacity-100 absolute z-10 duration-200 transition-opacity rounded-lg",
                         !isOpen && "opacity-0 pointer-events-none"
                     )}
                 ></div>
+                {/* Hover zone */} 
+                <div id={`popup-hov-${index}`} className={cn("absolute z-30", !isOpen && "pointer-events-none")}
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                ></div>
             </div>
         );
-    } else if ("label" in linkOrGroup) {
+    } else {
         const link: LinkProps = linkOrGroup;
         return <HeaderLink link={link} session={session} />;
     }
