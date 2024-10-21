@@ -69,13 +69,13 @@ G4cuisiner is G4 School student project.
 - Generate the Prisma client
 
   ```bash
-  pnpm prisma generate
+  pnpx prisma generate
   ```
 
 - Run Prisma database migrations
 
   ```bash
-  pnpm prisma migrate dev --name initial-migration
+  pnpx prisma migrate dev --name initial-migration
   ```
 
 - Run server project
@@ -83,3 +83,5 @@ G4cuisiner is G4 School student project.
    ```bash
    pnpm run dev
    ```
+
+- (optional) Clear your `localhost:3000` browser cookies is you have an error
